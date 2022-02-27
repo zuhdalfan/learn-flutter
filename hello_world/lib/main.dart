@@ -10,10 +10,51 @@ class MyApp extends StatelessWidget {
       title: 'Hello World Demo Application',
       theme: ThemeData(
         primarySwatch: Colors.blue,),
-      home: MyHomePage(title: 'Product List'),
+      home: MyHomePage2(title: 'Product List'),
     );
   }
 }
+
+void _showDialog(BuildContext context){
+  showDialog(
+    context: context,
+    builder: (BuildContext context){
+    return AlertDialog(
+      title: new Text("message"),
+      content: new Text("Hello World"),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text("Close"),
+          onPressed: (){
+            Navigator.of(context).pop();
+          }
+        ),
+      ],
+    );}
+  );
+} 
+
+class MyHomePage2 extends StatelessWidget{
+  MyHomePage2({Key?key, required this.title}):super(key:key);
+  final String title;
+  @override 
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(this.title),
+      ),
+      body: Center(
+        child: GestureDetector(
+          onTap: (){
+            _showDialog(context);
+          },
+          child: Text('Hello World'),
+        ),
+      ),
+    );
+  }
+}
+
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key?key, required this.title}) : super(key: key);
