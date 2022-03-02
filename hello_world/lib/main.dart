@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -181,7 +187,9 @@ class ProductBox extends StatelessWidget{
                       style: TextStyle(fontWeight: FontWeight.bold),),
                     Text(this.description, textAlign: TextAlign.center,),
                     Text("Price: "+this.price.toString()+" USD"),
-                    RatingBox(),
+                    Center(
+                      child: RatingBox(),
+                    ) 
                   ],
                 ),
               ))
@@ -226,7 +234,7 @@ class _RatingBoxState extends State<RatingBox>{
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(1),
           child: IconButton(
             icon: (_rating >=1?Icon(Icons.star,size: _size,):Icon(Icons.star_border,size: _size,)),
             color: Colors.red[500],
@@ -235,7 +243,7 @@ class _RatingBoxState extends State<RatingBox>{
           ),
         ),
         Container(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(1),
           child: IconButton(
             icon: (_rating >=2?Icon(Icons.star,size: _size,):Icon(Icons.star_border,size: _size,)),
             color: Colors.red[500],
@@ -244,7 +252,7 @@ class _RatingBoxState extends State<RatingBox>{
           ),
         ),
         Container(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(1),
           child: IconButton(
             icon: (_rating >=3?Icon(Icons.star,size: _size,):Icon(Icons.star_border,size: _size,)),
             color: Colors.red[500],
