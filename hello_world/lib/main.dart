@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:hello_world/scoped-model.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:hello_world/navigation.dart';
+// import 'package:hello_world/scoped-model.dart';
+// import 'package:scoped_model/scoped_model.dart';
 
 
 
-void main() => runApp(MyAppScopedModel());
+void main() => runApp(MyAppNav());
 
 class MyApp extends StatelessWidget {
 // This widget is the root of your application.
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Hello World Demo Application',
       theme: ThemeData(
         primarySwatch: Colors.blue,),
-      home: MyHomePage(title: 'Product List'),
+      home: MyHomePageNav(title: 'Product List'),
     );
   }
 }
