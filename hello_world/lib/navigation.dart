@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/main.dart';
 
 class MyAppNav extends StatelessWidget{
   @override
@@ -15,67 +16,49 @@ class MyAppNav extends StatelessWidget{
   }
 }
 
-class MyHomePageNav extends StatelessWidget{
-  MyHomePageNav({Key?key, required this.title}):super(key: key);
-
-  final String title;
-
-  @override 
-  Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(this.title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello World'
-        ),
-      ),
-    );
-  }
-}
-
-class Product{
+class ProductNav{
   final String name, description, image;
   final int price;
 
-  Product(this.name,this.description,this.price,this.image);
+  ProductNav(this.name,this.description,this.price,this.image);
+
+  static getProductNav() {}
 }
 
-List<Product> getProduct(){
-  List<Product> items = <Product>[];
+List<ProductNav> getProductNav(){
+  List<ProductNav> items = <ProductNav>[];
 
-  items.add(Product(
+  items.add(ProductNav(
     "Pixel",
     "Pixel is the most feature-full phone ever",
     800,
     "chair1.jpg"
   ));
-  items.add(Product(
+  items.add(ProductNav(
     "Pixel",
     "Pixel is the most feature-full phone ever",
     800,
     "chair2.jpg"
   ));
-  items.add(Product(
+  items.add(ProductNav(
     "Pixel",
     "Pixel is the most feature-full phone ever",
     800,
     "chair3.jpeg"
   ));
-  items.add(Product(
+  items.add(ProductNav(
     "Pixel",
     "Pixel is the most feature-full phone ever",
     800,
     "chair4.jpg"
   ));
-  items.add(Product(
+  items.add(ProductNav(
     "Pixel",
     "Pixel is the most feature-full phone ever",
     800,
     "chair5.png"
   ));
-  items.add(Product(
+  items.add(ProductNav(
     "Pixel",
     "Pixel is the most feature-full phone ever",
     800,
@@ -171,7 +154,7 @@ class _RatingBoxNavState extends State<RatingBoxNav>{
 class ProductBox extends StatelessWidget{
   ProductBox({Key?key, required this.item}):super(key: key);
 
-  final Product item;
+  final ProductNav item;
   
   @override
   Widget build(BuildContext context) {
@@ -205,3 +188,77 @@ class ProductBox extends StatelessWidget{
   }
 }
 
+class ProductPage extends StatelessWidget {
+  ProductPage({Key?key,required this.item}):super(key:key);
+  
+  final ProductNav item;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(this.item.name),
+      ),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset("assets/appimage/"+this.item.image),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        this.item.name,
+                        style: TextStyle(fontWeight:FontWeight.bold),
+                      ),
+                      Text(this.item.description),
+                      Text("Price: "+this.item.price.toString()),
+                      RatingBox(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),  
+        ),
+      ),
+    );
+  }
+}
+
+
+class MyHomePageNav extends StatelessWidget{
+  MyHomePageNav({Key?key, required this.title}):super(key: key);
+
+  final String title;
+  final items = ProductNav.getProductNav();
+
+  @override 
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Product Navigation"),
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context,index){
+          return GestureDetector(
+            child: ProductBox(item: items[index]),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductPage(item:items[index])),
+              );
+            },
+          );
+        })
+    );
+  }
+}
