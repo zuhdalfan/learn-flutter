@@ -4,7 +4,6 @@ import 'dart:html';
 
 import 'package:book_tracker/screen/get_started.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 void main() {
   runApp(const MyApp());
